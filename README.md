@@ -1,4 +1,4 @@
-# Assignment 12 - React Component Library with Storybook
+# Assignment 13 - UI Component Library with Build Quality Checks
 
 ## Author
 
@@ -12,9 +12,11 @@ Full Stack Web Development Diploma
 
 # Project Overview
 
-This project is a responsive UI Component Library built using React, TypeScript, Storybook, Styled Components, Jest, React Testing Library, and Docker.
+This project extends Assignment 12 by adding automated code quality checks to an existing React UI Component Library.
 
-The purpose of this project is to create reusable UI components that can be tested, documented, and deployed using modern web development tools and practices.
+The project uses React, TypeScript, Storybook, Styled Components, Jest, React Testing Library, Docker, Husky, Prettier, ESLint, and GitHub Actions to create a reusable component library with an automated code quality and build process.
+
+Husky performs local pre-commit checks before code can be committed, while GitHub Actions performs the same checks in the GitHub repository whenever code is pushed or a pull request is created.
 
 ---
 
@@ -54,6 +56,10 @@ Each component includes:
 - Styled Components
 - Jest
 - React Testing Library
+- ESLint
+- Prettier
+- Husky
+- GitHub Actions
 - Docker
 - Nginx
 
@@ -79,7 +85,7 @@ Optional for local development:
 Open a terminal in the project root directory and run:
 
 ```bash
-docker build -t lerat_jordan_coding_assignment12 .
+docker build -t lerat_jordan_coding_assignment13 .
 ```
 
 ## Step 2 - Run the Docker Container
@@ -87,7 +93,7 @@ docker build -t lerat_jordan_coding_assignment12 .
 Run the container using:
 
 ```bash
-docker run --name lerat_jordan_coding_assignment12 -p 8083:80 lerat_jordan_coding_assignment12
+docker run --name lerat_jordan_coding_assignment13 -p 8018:80 lerat_jordan_coding_assignment13
 ```
 
 ## Step 3 - Open the Application
@@ -95,7 +101,7 @@ docker run --name lerat_jordan_coding_assignment12 -p 8083:80 lerat_jordan_codin
 Open a web browser and navigate to:
 
 ```text
-http://localhost:8083
+http://127.0.0.1:8018
 ```
 
 Storybook will load and display all available UI components.
@@ -134,13 +140,27 @@ Run all component tests:
 npm test
 ```
 
-When Jest starts, press:
+Or run the tests once without watch mode:
 
-```text
-a
+```bash
+npm test -- --watchAll=false
 ```
 
-to run all tests.
+---
+
+# Code Quality Checks
+
+This project uses Husky to perform automated code quality checks before every commit.
+
+The following checks are performed automatically:
+
+- Prettier formatting check
+- ESLint code quality check
+- Jest unit tests
+
+If any of these checks fail, the commit will be blocked until the issues have been fixed.
+
+The same checks are also performed automatically by GitHub Actions whenever code is pushed to the GitHub repository or a pull request is opened.
 
 ---
 
@@ -168,19 +188,19 @@ This project satisfies the assignment requirements by:
 - Creating a working directory named:
 
 ```text
-lerat_jordan_ui_garden
+lerat_jordan_ui_garden_build_checks
 ```
 
 - Creating a container named:
 
 ```text
-lerat_jordan_coding_assignment12
+lerat_jordan_coding_assignment13
 ```
 
 - Hosting the application on:
 
 ```text
-http://localhost:8083
+http://127.0.0.1:8018
 ```
 
 ---
@@ -189,12 +209,13 @@ http://localhost:8083
 
 The Dockerfile performs the following tasks:
 
-1. Uses a Node.js image to build the application.
+1. Uses a Node.js image to build the Storybook application.
 2. Creates the required working directory.
 3. Installs project dependencies.
 4. Generates a production Storybook build.
 5. Uses Nginx to host the static Storybook files.
-6. Exposes the application through localhost port 8083.
+6. Copies the production build into the Nginx web server.
+7. Hosts the application on localhost port 8018.
 
 ---
 
@@ -207,17 +228,28 @@ This project demonstrates the ability to:
 - Test components using Jest and React Testing Library.
 - Document components using Storybook.
 - Style components using Styled Components.
+- Integrate automated code quality checks into the build process.
+- Configure Husky pre-commit hooks.
+- Configure GitHub Actions continuous integration.
 - Create a production-ready Docker deployment.
-- Host a production build using Nginx.
+- Host a production Storybook build using Nginx.
 
 ---
 
 # Repository Structure
 
 ```text
-assignment-12-component-library/
+assignment-13-component-library/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── .husky/
+│   └── pre-commit
 │
 ├── .storybook/
+│
 ├── src/
 │   ├── components/
 │   │   ├── Button/
