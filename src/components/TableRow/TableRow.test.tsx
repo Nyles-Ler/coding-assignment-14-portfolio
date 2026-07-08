@@ -23,7 +23,7 @@ test('table row background color changes when disabled', () => {
     </table>
   );
 
-  expect(screen.getByText('Disabled Row').parentElement).toHaveStyleRule(
+  expect(screen.getByTestId('table-row')).toHaveStyleRule(
     'background-color',
     '#1f2933'
   );

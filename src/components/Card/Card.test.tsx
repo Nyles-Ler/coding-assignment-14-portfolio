@@ -10,7 +10,7 @@ test('card is visible', () => {
 test('card background color changes when disabled', () => {
   render(<Card disabled />);
 
-  expect(screen.getByText('Card Title').parentElement).toHaveStyleRule(
+  expect(screen.getByTestId('card')).toHaveStyleRule(
     'background-color',
     '#1f2933'
   );

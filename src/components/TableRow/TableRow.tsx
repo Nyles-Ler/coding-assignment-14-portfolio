@@ -20,7 +20,7 @@ export const TableRow = ({
   disabled = false,
 }: TableRowProps) => {
   return (
-    <StyledTableRow $disabled={disabled}>
+    <StyledTableRow data-testid="table-row" $disabled={disabled}>
       <td>{text}</td>
     </StyledTableRow>
   );

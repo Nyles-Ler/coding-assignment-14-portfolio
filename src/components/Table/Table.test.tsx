@@ -8,7 +8,10 @@ test('table is visible', () => {
 });
 
 test('table background color changes when disabled', () => {
-  const { container } = render(<Table disabled />);
+  render(<Table disabled />);
 
-  expect(container.firstChild).toHaveStyleRule('background-color', '#1f2933');
+  expect(screen.getByTestId('table')).toHaveStyleRule(
+    'background-color',
+    '#1f2933'
+  );
 });

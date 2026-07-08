@@ -28,7 +28,7 @@ export const TableFooter = ({
   disabled = false,
 }: TableFooterProps) => {
   return (
-    <StyledTableFooter $disabled={disabled}>
+    <StyledTableFooter data-testid="table-footer" $disabled={disabled}>
       <tr>
         <td>{text}</td>
       </tr>

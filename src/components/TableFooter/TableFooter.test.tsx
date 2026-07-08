@@ -19,7 +19,7 @@ test('table footer background color changes when disabled', () => {
     </table>
   );
 
-  expect(screen.getByText('Disabled Footer').closest('tfoot')).toHaveStyleRule(
+  expect(screen.getByTestId('table-footer')).toHaveStyleRule(
     'background-color',
     '#1f2933'
   );

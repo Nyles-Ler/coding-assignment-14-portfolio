@@ -29,7 +29,7 @@ const StyledTable = styled.table<StyledTableProps>`
 
 export const Table = ({ disabled = false }: TableProps) => {
   return (
-    <StyledTable $disabled={disabled}>
+    <StyledTable data-testid="table" $disabled={disabled}>
       <thead>
         <tr>
           <TableHeader text="Skill" disabled={disabled} />

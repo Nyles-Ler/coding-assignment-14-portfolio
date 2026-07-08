@@ -50,7 +50,7 @@ export const Card = ({
   disabled = false,
 }: CardProps) => {
   return (
-    <StyledCard $disabled={disabled}>
+    <StyledCard data-testid="card" $disabled={disabled}>
       <h3>{title}</h3>
       <p>{content}</p>
     </StyledCard>
