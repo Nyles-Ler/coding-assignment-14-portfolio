@@ -7,7 +7,9 @@ interface StyledHeroImageProps {
 
 const StyledHeroImage = styled.img<StyledHeroImageProps>`
   width: 100%;
-  height: 400px;
+  max-width: 500px;
+  height: auto;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
 
   background-color: ${(props) => (props.$disabled ? '#1f2933' : '#050816')};
@@ -28,7 +30,7 @@ const StyledHeroImage = styled.img<StyledHeroImageProps>`
 `;
 
 export const HeroImage = ({
-  src = 'https://via.placeholder.com/1200x400/050816/8a3ffc?text=Hero+Image',
+  src = '../../assets/images/profile/hero-image.png',
   alt = 'Hero Image',
   disabled = false,
 }: HeroImageProps) => {
