@@ -1,4 +1,4 @@
-# Assignment 14 - Portfolio Website
+# Assignment 14 - Personal Portfolio Website
 
 ## Author
 
@@ -8,59 +8,95 @@ Full Stack Web Development Diploma
 
 ---
 
-# Project Overview
+## Project Overview
 
-This project is a responsive personal portfolio website built with React using the reusable component library developed in previous assignments.
+This project is a responsive personal portfolio website built with Create React App and reusable components developed in previous assignments.
 
-The portfolio showcases my projects, technical skills, development resources, and preferred development environment while demonstrating responsive design and modern web development practices.
+The portfolio highlights my school projects, technical skills, development resources, and preferred developer setup. The project also includes automated formatting, linting, testing, continuous integration, and a Dockerized production build.
 
 ---
 
-# Technologies Used
+## Technologies and Tools
 
 - React
 - TypeScript
-- Styled Components
+- Create React App
 - Storybook
+- Styled Components
 - Jest
 - React Testing Library
+- ESLint
+- Prettier
+- Husky
+- GitHub Actions
 - Docker
 - Nginx
 
 ---
 
-# Portfolio Sections
+## Portfolio Sections
 
-The portfolio contains the following sections:
-
-- Hero
-- Featured Projects
+- Basic Information
+- Featured Work
 - Skills
 - Resources
 - Developer Setup
-- Footer
 
 ---
 
-# Running the Application with Docker
+## Prerequisites
 
-## Build the Docker Image
+Install the following before running the project:
 
-From the project root directory run:
+- Docker Desktop
+- Node.js
+- npm
+
+---
+
+## Run the Production Application with Docker
+
+### 1. Build the Docker image
+
+From the project root directory, run:
 
 ```bash
 docker build -t lerat_jordan_coding_assignment14 .
 ```
 
-## Run the Docker Container
+### 2. Run the Docker container
 
 ```bash
 docker run --name lerat_jordan_coding_assignment14 -p 5575:80 lerat_jordan_coding_assignment14
 ```
 
-## Open the Portfolio
+### 3. Open the application
 
-Open your browser and navigate to:
+Open a browser and navigate to:
+
+```text
+http://127.0.0.1:5575
+```
+
+The Docker container serves the production React build through Nginx.
+
+---
+
+## Required Docker Configuration
+
+Container name:
+
+```text
+lerat_jordan_coding_assignment14
+```
+
+Working directory:
+
+```text
+lerat_jordan_final_site
+```
+
+Application address:
 
 ```text
 http://127.0.0.1:5575
@@ -68,7 +104,7 @@ http://127.0.0.1:5575
 
 ---
 
-# Running the Application Locally
+## Run the Application Locally
 
 Install dependencies:
 
@@ -76,7 +112,7 @@ Install dependencies:
 npm install
 ```
 
-Start the development server:
+Start the Create React App development server:
 
 ```bash
 npm start
@@ -90,53 +126,94 @@ http://localhost:3000
 
 ---
 
-# Running Tests
+## Run Storybook
 
-Run all tests:
+Start Storybook:
 
 ```bash
-npm test
+npm run storybook
 ```
 
-Run tests once without watch mode:
+Open:
+
+```text
+http://localhost:6006
+```
+
+Storybook displays the reusable components developed in the previous assignments.
+
+---
+
+## Code Quality and Testing
+
+Check formatting:
+
+```bash
+npm run format:check
+```
+
+Automatically format files:
+
+```bash
+npm run format
+```
+
+Run ESLint:
+
+```bash
+npm run lint
+```
+
+Run tests once:
 
 ```bash
 npm test -- --watchAll=false
 ```
 
----
+Create a production build:
 
-# Dockerfile Summary
-
-The Dockerfile:
-
-- Builds a production React application
-- Uses the required working directory:
-
-```text
-lerat_jordan_final_site
+```bash
+npm run build
 ```
 
-- Serves the production build using Nginx
-- Runs the portfolio on:
-
-```text
-http://127.0.0.1:5575
-```
+Husky runs formatting, linting, and unit tests before commits. GitHub Actions runs the same checks after pushes and pull requests.
 
 ---
 
-# Repository Structure
+## Dockerfile Summary
+
+The Dockerfile uses a multi-stage production build:
+
+1. Uses Node.js to install dependencies.
+2. Creates the required `/lerat_jordan_final_site` working directory.
+3. Generates an optimized Create React App production build.
+4. Copies the build files into an Nginx container.
+5. Serves the portfolio through port 80 inside the container.
+6. Maps the application to `127.0.0.1:5575`.
+
+---
+
+## Repository Structure
 
 ```text
 coding-assignment-14-portfolio/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── .husky/
+│   └── pre-commit
+│
+├── .storybook/
 │
 ├── src/
 │   ├── assets/
 │   ├── components/
 │   ├── data/
 │   ├── sections/
-│   └── App.js
+│   ├── App.js
+│   └── App.test.js
 │
 ├── Dockerfile
 ├── README.md

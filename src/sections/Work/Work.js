@@ -36,7 +36,7 @@ const Work = () => {
       <Heading>Featured Projects</Heading>
 
       <Intro>
-        A Selection of fullstack, front-end, and development workflow projects
+        A selection of full-stack, front-end, and development workflow projects
         completed throughout my program.
       </Intro>
 
