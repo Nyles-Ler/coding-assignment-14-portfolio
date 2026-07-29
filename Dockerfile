@@ -1,10 +1,10 @@
-# Stage 1 - Build Storybook
+# Stage 1 - Build Portfolio
 
 # Use Node.js image to build the application
 FROM node:20-alpine AS build
 
 # Create and set the working directory
-WORKDIR /lerat_jordan_ui_garden_build_checks
+WORKDIR /lerat_jordan_final_site
 
 # Copy package files first to leverage Docker caching
 COPY package*.json ./
@@ -15,23 +15,19 @@ RUN npm install
 # Copy the rest of the application source code
 COPY . .
 
-# Generate a production Storybook build
-RUN npm run build-storybook
+# Generate a production Create React App build
+RUN npm run build
 
 # Stage 2 - Serve Production Build
 
 # Use a lightweight nginx image to host the static files
 FROM nginx:alpine
 
-# Create and set the working directory
-WORKDIR /lerat_jordan_ui_garden_build_checks
+# Copy the React build into Nginx's web directory
+COPY --from=build /lerat_jordan_final_site/build /usr/share/nginx/html
 
-# Copy the production Storybook files from the build stage
-# into nginx's default web server directory
-COPY --from=build /lerat_jordan_ui_garden_build_checks/storybook-static /usr/share/nginx/html
-
-# Document that the container serves web traffic
-# (nginx internally serves on port 80)
+# Nginx serves web traffic internally on port 80
 EXPOSE 80
+
 # Start nginx and keep the container running
 CMD ["nginx", "-g", "daemon off;"]
